@@ -1,14 +1,12 @@
 <template>
   <div class="tab-bar-item" @click="btnClick">
-    <!-- <img src="../../assets/img/tabbar/home.svg" alt />
-    <div>首页</div>-->
     <div v-if="!isActive">
       <slot name="item-icon"></slot>
     </div>
     <div v-else>
       <slot name="item-icon-active"></slot>
     </div>
-    <div :class="{active:isActive}" :style="activeStyle">
+    <div :style="activeStyle">
       <slot name="item-text"></slot>
     </div>
   </div>
@@ -19,18 +17,15 @@ export default {
   name: "TabBarItem",
   props: {
     path: String,
+    // 可以在使用此组件时在里面传入activeColor改变颜色
     activeColor: {
       type: String,
       default: "red"
     }
   },
-  data() {
-    return {
-      // isActive: true
-    };
-  },
   computed: {
     isActive() {
+      //检索此时活跃的路由路径和组件路径
       return this.$route.path.indexOf(this.path) !== -1;
     },
     activeStyle() {
@@ -60,7 +55,4 @@ export default {
   vertical-align: middle;
   margin-bottom: 2;
 }
-/* .active {
-  /* color: red;
-} */
 </style>
