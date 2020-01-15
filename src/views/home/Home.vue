@@ -32,8 +32,6 @@ export default {
       //保存数据,函数调用完后会回调数据
       this.banners = res.data.banner.list;
       this.recommends = res.data.recommend.list;
-      this.dKeywords = res.data.dKeyword;
-      this.keywords = res.data.keywords;
     });
   }
 };
