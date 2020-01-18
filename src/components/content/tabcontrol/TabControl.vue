@@ -31,6 +31,8 @@ export default {
   methods: {
     tabClick(index) {
       this.currendIndex = index;
+      //子往外传
+      this.$emit("tabClick", index);
     }
   }
 };
