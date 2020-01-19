@@ -33,22 +33,33 @@ export default {
       pullUpLoad: this.pullUpLoad
     });
     //2.监听滚动的位置
-    this.scroll.on("scroll", position => {
-      this.$emit("scroll", position);
-    });
+    if (this.probeType === 2 || this.probeType === 3) {
+      this.scroll.on("scroll", position => {
+        this.$emit("scroll", position);
+      });
+    }
+
     //3.监听上拉加载更多
-    this.scroll.on("pullingUp", () => {
-      this.$emit("pullingUp");
-    });
+    if (this.pullUpLoad) {
+      this.scroll.on("pullingUp", () => {
+        this.$emit("pullingUp");
+      });
+    }
   },
   methods: {
     //回到顶部
     scrollTo(x, y, time = 500) {
-      this.scroll.scrollTo(x, y, time);
+      //如果this.scroll为null不会继续执行
+      this.scroll && this.scroll.scrollTo(x, y, time);
     },
-    //
+    //完成加载更多之后再次加载
     finishPullUp() {
-      this.scroll.finishPullUp();
+      this.scroll && this.scroll.finishPullUp();
+    },
+    //图片刷新
+    refresh() {
+      this.scroll && this.scroll.refresh();
+      // console.log("---");
     }
   }
 };
